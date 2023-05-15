@@ -77,7 +77,21 @@ for i=1:Nligfin
            psm1(i,j,1)=0;
            psm1(i,j,2)=1;
            psm1(i,j,3)=0;
+           end
+     end
+end
 
+%%%% for detection ships by applying mask%%%%%
+for i=1:Nligfin
+    for j=1:Ncol
+        if ps1(i,j)>pd1(i,j) && ps1(i,j)>pv1(i,j)
+             psm1(i,j,1)=0;
+             psm1(i,j,2)=0;
+             psm1(i,j,3)=1;
+        else
+             psm1(i,j,1)=1;
+             psm1(i,j,2)=1;
+             psm1(i,j,3)=1;
         end
     end
 end
