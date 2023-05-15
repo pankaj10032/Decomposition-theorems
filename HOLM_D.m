@@ -95,6 +95,54 @@ for i=1:Nligfin
         end
     end
 end
+
+%%%%%to count the pixels which diffrentiate ship from other whole area(sea)%%%%
+arr=zeros(Nligfin, Ncol);
+count1=0;
+count2=0;
+for i=1:Nligfin
+    for j=1:Ncol
+        if psm1(i,j,1)==0 && psm1(i,j,2)==0 && psm1(i,j,3)==0
+            arr(i,j)=0;
+            count1=count1+1;
+        else
+            arr(i,j)=1;
+            count2=count2+1;
+        end
+    end
+end
+
+% just for checking whether we are right or not
+count3=0;
+count4=0;
+for i=1:Nligfin
+    for j=1:Ncol
+        if arr(i,j)==1
+            count3=count3+1;
+        else
+            count4=count4+1;
+        end
+    end
+end
+       
+sum_ps1=0;
+sum_pd1=0;
+sum_pv1=0;
+for i=1:Nligfin
+    for j=1:Nligfin
+        if arr(i,j)==1
+            sum_ps1=sum_ps1+ps1(i,j);
+            sum_pd1=sum_pd1+pd1(i,j);
+            sum_pv1=sum_pv1+pv1(i,j);
+        end
+    end
+end
+
+sum_span=sum_ps1+sum_pd1+sum_pv1;
+mean_ps1=sum_ps1/sum_span;
+mean_pd1=sum_pd1/sum_span;
+mean_pv1=sum_pv1/sum_span;
+mean_span=mean_ps1+mean_pd1+mean_pv1;
 % 
 % 
 s_ps1=0;
